@@ -57,7 +57,7 @@ export default async function handler(req, res) {
     const data = await brevoResponse.json();
 
     // Handle Brevo response
-    if (brevoResponse.ok || brevoResponse.status === 204) {
+    if (brevoResponse.ok || brevoResponse.status === 201) {
       return res.status(200).json({ 
         success: true, 
         message: 'Successfully subscribed!' 
