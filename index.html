@@ -677,38 +677,39 @@
             const messageDiv = document.getElementById('formMessage');
             const submitBtn = e.target.querySelector('.submit-btn');
             
+            // Get current language
+            const currentLang = document.querySelector('.lang-btn.active')?.dataset.lang || 'en';
+            
             // Disable button during submission
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
             messageDiv.textContent = '';
             
             try {
-                // Brevo API integration
-                // You'll need to replace 'YOUR_BREVO_API_KEY' with your actual API key
-                // And 'YOUR_LIST_ID' with your Brevo list ID
-                
-                const response = await fetch('https://api.brevo.com/v3/contacts', {
+                // Call Vercel serverless function
+                const response = await fetch('/api/subscribe', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'api-key': 'YOUR_BREVO_API_KEY' // Replace with your actual API key
                     },
                     body: JSON.stringify({
                         email: email,
-                        listIds: [YOUR_LIST_ID], // Replace with your actual list ID
-                        updateEnabled: true
+                        language: currentLang
                     })
                 });
                 
-                if (response.ok || response.status === 201) {
-                    messageDiv.textContent = 'Thanks for subscribing! Check your inbox soon.';
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    messageDiv.textContent = data.message || 'Thanks for subscribing! Check your inbox soon.';
                     messageDiv.className = 'form-message success';
                     document.getElementById('emailInput').value = '';
                 } else {
-                    throw new Error('Subscription failed');
+                    messageDiv.textContent = data.error || 'Something went wrong. Please try again.';
+                    messageDiv.className = 'form-message error';
                 }
             } catch (error) {
-                messageDiv.textContent = 'Something went wrong. Please try again.';
+                messageDiv.textContent = 'Connection error. Please try again.';
                 messageDiv.className = 'form-message error';
             } finally {
                 submitBtn.disabled = false;
