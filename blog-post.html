@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Blog - European Guitar Hub</title>
+    <meta name="description" id="pageDescription" content="">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" id="ogTitle" content="">
+    <meta property="og:description" id="ogDescription" content="">
+    <meta property="og:image" id="ogImage" content="">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-sky: #BBE0EF;
+            --color-navy: #161E54;
+            --color-orange: #F16D34;
+            --color-coral: #FF986A;
+            --color-white: #FFFFFF;
+            --color-cream: #FFF9F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Archivo', sans-serif;
+            color: var(--color-navy);
+            line-height: 1.8;
+            background-color: var(--color-cream);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 400;
+            line-height: 1.2;
+            font-style: italic;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            padding: 24px 0;
+            background-color: var(--color-cream);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--color-orange);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 24px;
+            font-style: italic;
+            color: var(--color-navy);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-navy);
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-orange);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+            background: var(--color-sky);
+            padding: 4px;
+            border-radius: 12px;
+        }
+        
+        .lang-btn {
+            font-family: 'Archivo', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-navy);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-btn.active {
+            background: var(--color-orange);
+            color: var(--color-white);
+        }
+        
+        /* Article Hero */
+        .article-hero {
+            padding: 60px 0 0;
+        }
+        
+        .article-header {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding-bottom: 60px;
+        }
+        
+        .article-tags {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .article-tag {
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .article-title {
+            font-size: 72px;
+            color: var(--color-navy);
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+        
+        .article-excerpt {
+            font-size: 22px;
+            color: var(--color-navy);
+            opacity: 0.7;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+        
+        .article-meta {
+            font-size: 15px;
+            color: var(--color-navy);
+            opacity: 0.6;
+        }
+        
+        .featured-image-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 4px solid var(--color-orange);
+        }
+        
+        .featured-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 0 24px;
+        }
+        
+        .article-body h2 {
+            font-size: 42px;
+            margin: 60px 0 24px;
+            color: var(--color-navy);
+        }
+        
+        .article-body h3 {
+            font-size: 32px;
+            margin: 48px 0 20px;
+            color: var(--color-navy);
+        }
+        
+        .article-body p {
+            font-size: 19px;
+            line-height: 1.8;
+            margin-bottom: 28px;
+            color: var(--color-navy);
+        }
+        
+        .article-body strong {
+            font-weight: 700;
+            color: var(--color-orange);
+        }
+        
+        .article-body em {
+            font-style: italic;
+            font-family: 'DM Serif Display', serif;
+        }
+        
+        .article-body a {
+            color: var(--color-orange);
+            text-decoration: underline;
+        }
+        
+        .article-body ul,
+        .article-body ol {
+            margin: 28px 0;
+            padding-left: 32px;
+        }
+        
+        .article-body li {
+            margin-bottom: 12px;
+            font-size: 19px;
+        }
+        
+        .article-body blockquote {
+            border-left: 4px solid var(--color-orange);
+            padding-left: 32px;
+            margin: 40px 0;
+            font-size: 24px;
+            font-family: 'DM Serif Display', serif;
+            font-style: italic;
+        }
+        
+        .article-body img {
+            width: 100%;
+            border-radius: 16px;
+            margin: 48px 0;
+        }
+        
+        /* Share Section */
+        .share-section {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            background: var(--color-white);
+            border-radius: 20px;
+            border: 2px solid var(--color-orange);
+        }
+        
+        .share-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 100px 0;
+            font-size: 18px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            background: var(--color-navy);
+            color: var(--color-white);
+            text-align: center;
+            border-top: 4px solid var(--color-orange);
+            margin-top: 80px;
+        }
+        
+        @media (max-width: 768px) {
+            .article-title { font-size: 42px; }
+            .article-excerpt { font-size: 18px; }
+            .article-body h2 { font-size: 32px; }
+            .article-body p { font-size: 17px; }
+            .nav-menu { gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">European Guitar Hub</a>
+                <nav class="nav-menu">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/blog.html" class="nav-link">Blog</a>
+                    <div class="lang-switcher">
+                        <button class="lang-btn active" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="pl">PL</button>
+                        <button class="lang-btn" data-lang="es">ES</button>
+                        <button class="lang-btn" data-lang="it">IT</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div id="loading" class="loading">Loading article...</div>
+    
+    <div id="articleContent" style="display: none;">
+        <section class="article-hero">
+            <div class="container">
+                <div class="article-header">
+                    <div class="article-tags" id="articleTags"></div>
+                    <h1 class="article-title" id="articleTitle"></h1>
+                    <p class="article-excerpt" id="articleExcerpt"></p>
+                    <div class="article-meta" id="articleMeta"></div>
+                </div>
+                <div class="featured-image-wrapper">
+                    <img id="featuredImage" src="" alt="" class="featured-image">
+                </div>
+            </div>
+        </section>
+
+        <section class="article-content">
+            <div class="article-body" id="articleBody"></div>
+        </section>
+
+        <section class="share-section">
+            <div class="container">
+                <h3 class="share-title">Share this article</h3>
+                <div class="share-buttons">
+                    <a href="#" id="shareTwitter" class="share-btn" style="background: #1DA1F2;" target="_blank">Twitter</a>
+                    <a href="#" id="shareFacebook" class="share-btn" style="background: #1877F2;" target="_blank">Facebook</a>
+                    <a href="#" id="shareLinkedIn" class="share-btn" style="background: #0A66C2;" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 European Guitar Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('slug');
+        let currentLang = urlParams.get('lang') || 'en';
+        
+        // Set active language
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === currentLang);
+            btn.addEventListener('click', function() {
+                window.location.href = `?slug=${slug}&lang=${this.dataset.lang}`;
+            });
+        });
+        
+        async function loadArticle() {
+            if (!slug) {
+                window.location.href = '/blog.html';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/blog/post?slug=${slug}&lang=${currentLang}`);
+                const data = await response.json();
+                
+                if (!data.post) throw new Error('Post not found');
+                
+                const post = data.post;
+                
+                // Update page
+                document.title = `${post.title} - European Guitar Hub`;
+                document.getElementById('pageDescription').content = post.seo?.metaDescription || post.excerpt || '';
+                document.getElementById('ogTitle').content = post.title;
+                document.getElementById('ogDescription').content = post.seo?.metaDescription || post.excerpt || '';
+                document.getElementById('ogImage').content = post.seo?.ogImage || post.mainImage?.asset?.url || '';
+                
+                document.getElementById('articleTitle').textContent = post.title;
+                document.getElementById('articleExcerpt').textContent = post.excerpt || '';
+                
+                // Tags
+                if (post.tags && post.tags.length > 0) {
+                    document.getElementById('articleTags').innerHTML = post.tags.map(tag => 
+                        `<span class="article-tag" style="background: ${tag.color || '#BBE0EF'}; color: ${tag.color === '#161E54' ? '#FFF' : '#161E54'};">${tag.name}</span>`
+                    ).join('');
+                }
+                
+                // Date
+                const date = new Date(post.publishedAt).toLocaleDateString(currentLang, { 
+                    year: 'numeric', month: 'long', day: 'numeric' 
+                });
+                document.getElementById('articleMeta').textContent = date;
+                
+                // Image
+                if (post.mainImage?.asset?.url) {
+                    document.getElementById('featuredImage').src = post.mainImage.asset.url;
+                    document.getElementById('featuredImage').alt = post.mainImage.alt || post.title;
+                }
+                
+                // Body
+                if (post.body && Array.isArray(post.body)) {
+                    document.getElementById('articleBody').innerHTML = renderPortableText(post.body);
+                }
+                
+                // Share links
+                const url = encodeURIComponent(window.location.href);
+                const title = encodeURIComponent(post.title);
+                document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+                document.getElementById('shareFacebook').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                document.getElementById('shareLinkedIn').href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                
+                // Show content
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('articleContent').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loading').textContent = 'Article not found';
+            }
+        }
+        
+        function renderPortableText(blocks) {
+            return blocks.map(block => {
+                if (block._type === 'block') {
+                    const style = block.style || 'normal';
+                    const text = block.children?.map(child => {
+                        let html = child.text || '';
+                        if (child.marks?.includes('strong')) html = `<strong>${html}</strong>`;
+                        if (child.marks?.includes('em')) html = `<em>${html}</em>`;
+                        return html;
+                    }).join('') || '';
+                    
+                    if (style === 'h2') return `<h2>${text}</h2>`;
+                    if (style === 'h3') return `<h3>${text}</h3>`;
+                    if (style === 'blockquote') return `<blockquote>${text}</blockquote>`;
+                    return `<p>${text}</p>`;
+                }
+                
+                if (block._type === 'image' && block.asset?.url) {
+                    return `<img src="${block.asset.url}" alt="${block.alt || ''}" />`;
+                }
+                
+                return '';
+            }).join('');
+        }
+        
+        loadArticle();
+    </script>
+</body>
+</html>

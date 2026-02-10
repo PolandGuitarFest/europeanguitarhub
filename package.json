@@ -1,0 +1,12 @@
+{
+  "name": "european-guitar-hub",
+  "version": "1.0.0",
+  "description": "European Guitar Hub landing page with email signup and blog",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@sanity/client": "^6.0.0"
+  }
+}
