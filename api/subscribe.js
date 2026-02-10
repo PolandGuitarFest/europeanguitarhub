@@ -1,6 +1,3 @@
-// Vercel Serverless Function for Brevo Email Subscription
-// Path: /api/subscribe.js
-
 export default async function handler(req, res) {
   // Only allow POST requests
   if (req.method !== 'POST') {
