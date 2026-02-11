@@ -20,6 +20,10 @@
       "dest": "/api/blog/$1.js"
     },
     {
+      "src": "/blog.html",
+      "dest": "/blog.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
