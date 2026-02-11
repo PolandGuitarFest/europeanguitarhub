@@ -1,5 +1,4 @@
 import { createClient } from '@sanity/client'
-import { toPlainText } from '@portabletext/react'
 
 const client = createClient({
   projectId: process.env.SANITY_PROJECT_ID,
